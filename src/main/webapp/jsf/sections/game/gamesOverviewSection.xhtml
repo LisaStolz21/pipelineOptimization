@@ -1,0 +1,39 @@
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
+
+<h:form id="gamesForm">
+    <p:panel header="Overview of all listed Games">
+        <p:panelGrid columns="1">
+            <p:dataTable id="gamesTable" var="singleGame"
+                         value="#{gamesController.games}"
+                         rowKey="#{singleGame.id}">
+                <p:column headerText="Name">
+                    <h:outputText value="#{singleGame.name}"/>
+                </p:column>
+                <p:column headerText="Genre">
+                    <h:outputText value="#{singleGame.gamesGenre.name}"/>
+                </p:column>
+                <p:column headerText="Platform">
+                    <p:selectOneMenu id="selectPlatformMenu" value="#{gamesController.selectedPlatform}">
+                        <f:selectItems value="#{gamesController.getPlatformsString(singleGame.platform)}"
+                                       var="selectedPlatform" itemValue="#{selectedPlatform}"
+                                       itemLabel="#{selectedPlatform}"/>
+                    </p:selectOneMenu>
+                </p:column>
+                <p:column headerText="Developer">
+                    <h:outputText value="#{singleGame.developer}"/>
+                </p:column>
+                <p:column headerText="Release">
+                    <h:outputText value="#{gamesController.getReleaseDate(singleGame.release)}"/>
+                </p:column>
+                <p:column headerText="select" width="8%" selectionMode="single">
+
+                </p:column>
+            </p:dataTable>
+        </p:panelGrid>
+    </p:panel>
+</h:form>
+
+</html>

@@ -1,0 +1,14 @@
+<component name="ArtifactManager">
+  <artifact type="war" name="pipelineOptimization:war">
+    <output-path>$PROJECT_DIR$/target</output-path>
+    <properties id="maven-jee-properties">
+      <options>
+        <module>pipelineOptimization</module>
+        <packaging>war</packaging>
+      </options>
+    </properties>
+    <root id="archive" name="pipelineOptimization.war">
+      <element id="artifact" artifact-name="pipelineOptimization:war exploded" />
+    </root>
+  </artifact>
+</component>
