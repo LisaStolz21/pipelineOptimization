@@ -17,6 +17,7 @@
                 </p:column>
                 <p:column headerText="Platform">
                     <p:selectOneMenu id="selectPlatformMenu" value="#{gamesController.selectedPlatform}">
+                        <p:ajax event="change" update="gamesForm"/>
                         <f:selectItems value="#{gamesController.getPlatformsString(singleGame.platform)}"
                                        var="selectedPlatform" itemValue="#{selectedPlatform}"
                                        itemLabel="#{selectedPlatform}"/>
@@ -32,6 +33,9 @@
 
                 </p:column>
             </p:dataTable>
+            <h:outputText value="Current Time:"/>
+            <h:outputText value="#{gamesController.localDateTimeString}"/>
+
         </p:panelGrid>
     </p:panel>
 </h:form>

@@ -1,14 +1,13 @@
 package de.ee.optimization.game.boundary;
 
-import de.ee.optimization.game.entity.Games;
-import de.ee.optimization.game.entity.Platform;
-import de.ee.optimization.game.entity.PlatformMapper;
-import de.ee.optimization.game.entity.PlatformPackage;
+import de.ee.optimization.game.entity.*;
 
 import javax.annotation.PostConstruct;
 import javax.inject.Inject;
 import javax.inject.Named;
 import java.text.SimpleDateFormat;
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
@@ -16,8 +15,14 @@ import java.util.Set;
 
 @Named
 public class GamesController {
+
     @Inject
     GamesBF gamesBF;
+
+    @Inject
+    @Chosen
+    LocalDateTime localDateTime;
+
 
     private transient List<Games> listedGames;
 
@@ -34,15 +39,6 @@ public class GamesController {
 
     public String getReleaseDate(final Date releaseDate) {
         return SimpleDateFormat.getDateInstance().format(releaseDate);
-    }
-
-    public String getPlatforms(final PlatformPackage platformPackage) {
-        final Set<Platform> platformSet = PlatformMapper.getPlatforms(platformPackage);
-        final StringBuilder stringBuilder = new StringBuilder();
-        for (final Platform platform : platformSet) {
-            stringBuilder.append(platform.getName()).append(", ");
-        }
-        return stringBuilder.substring(0, stringBuilder.length() - 1);
     }
 
 
@@ -62,5 +58,11 @@ public class GamesController {
 
     public void setSelectedPlatform(final String selectedPlatform) {
         this.selectedPlatform = selectedPlatform;
+    }
+
+
+    public String getLocalDateTimeString() {
+        final DateTimeFormatter dtf = DateTimeFormatter.ofPattern("dd.MM.yyy_HH'h'mm'm'ss");
+        return localDateTime.format(dtf);
     }
 }
